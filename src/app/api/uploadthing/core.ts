@@ -6,11 +6,11 @@ import {
 } from 'uploadthing/next'
 
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf'
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
-import { PineconeStore } from 'langchain/vectorstores/pinecone'
+import { OpenAIEmbeddings } from '@langchain/openai'
 import { getPineconeClient } from '@/lib/pinecone'
 import { getUserSubscriptionPlan } from '@/lib/stripe'
 import { PLANS } from '@/config/stripe'
+import { PineconeStore } from '@langchain/pinecone'
 
 const f = createUploadthing()
 
@@ -99,11 +99,11 @@ const onUploadComplete = async ({
     const pinecone = await getPineconeClient()
     const pineconeIndex = pinecone.Index('docchat')
 
-    console.log("pineconeIndex", pineconeIndex)
-
     const embeddings = new OpenAIEmbeddings({
       openAIApiKey: process.env.OPENAI_API_KEY,
     })
+
+    console.log("pageLevelDocs", pageLevelDocs)
 
     await PineconeStore.fromDocuments(
       pageLevelDocs,

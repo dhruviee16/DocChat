@@ -3,8 +3,8 @@ import { openai } from '@/lib/openai'
 import { getPineconeClient } from '@/lib/pinecone'
 import { SendMessageValidator } from '@/lib/validators/SendMessageValidator'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
-import { PineconeStore } from 'langchain/vectorstores/pinecone'
+import { OpenAIEmbeddings } from '@langchain/openai'
+import { PineconeStore } from '@langchain/pinecone'
 import { NextRequest } from 'next/server'
 
 import { OpenAIStream, StreamingTextResponse } from 'ai'
@@ -50,7 +50,7 @@ export const POST = async (req: NextRequest) => {
   })
 
   const pinecone = await getPineconeClient()
-  const pineconeIndex = pinecone.Index('quill')
+  const pineconeIndex = pinecone.Index('docchat')
 
   const vectorStore = await PineconeStore.fromExistingIndex(
     embeddings,
@@ -100,10 +100,10 @@ export const POST = async (req: NextRequest) => {
   
   PREVIOUS CONVERSATION:
   ${formattedPrevMessages.map((message) => {
-    if (message.role === 'user')
-      return `User: ${message.content}\n`
-    return `Assistant: ${message.content}\n`
-  })}
+          if (message.role === 'user')
+            return `User: ${message.content}\n`
+          return `Assistant: ${message.content}\n`
+        })}
   
   \n----------------\n
   
