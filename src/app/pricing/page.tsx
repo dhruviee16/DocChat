@@ -29,7 +29,7 @@ const Page = () => {
       quota: 10,
       features: [
         {
-          text: '5 pages per PDF',
+          text: '10 pages per PDF',
           footnote:
             'The maximum amount of pages per PDF-file.',
         },
@@ -131,7 +131,7 @@ const Page = () => {
                         {tagline}
                       </p>
                       <p className='my-5 font-display text-6xl font-semibold'>
-                        ${price}
+                      ₹{price}
                       </p>
                       <p className='text-gray-500'>
                         per month
