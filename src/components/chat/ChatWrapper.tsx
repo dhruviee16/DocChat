@@ -38,7 +38,7 @@ const ChatWrapper = ({ fileId, isSubscribed }: ChatWrapperProps) => {
           </div>
         </div>
 
-        <ChatInput isDisabled />
+        {/* <ChatInput isDisabled /> */}
       </div>
     );
 
@@ -53,7 +53,7 @@ const ChatWrapper = ({ fileId, isSubscribed }: ChatWrapperProps) => {
           </div>
         </div>
 
-        <ChatInput isDisabled />
+        {/* <ChatInput isDisabled /> */}
       </div>
     );
 
@@ -88,7 +88,7 @@ const ChatWrapper = ({ fileId, isSubscribed }: ChatWrapperProps) => {
           </div>
         </div>
 
-        <ChatInput isDisabled />
+        {/* <ChatInput isDisabled /> */}
       </div>
     );
 
