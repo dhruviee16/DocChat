@@ -17,8 +17,7 @@ export async function POST(request: Request) {
     )
   } catch (err) {
     return new Response(
-      `Webhook Error: ${
-        err instanceof Error ? err.message : 'Unknown Error'
+      `Webhook Error: ${err instanceof Error ? err.message : 'Unknown Error'
       }`,
       { status: 400 }
     )
@@ -38,6 +37,8 @@ export async function POST(request: Request) {
       await stripe.subscriptions.retrieve(
         session.subscription as string
       )
+
+    console.log('checkout.session.completed')
 
     await db.user.update({
       where: {
@@ -71,6 +72,18 @@ export async function POST(request: Request) {
           subscription.current_period_end * 1000
         ),
       },
+    })
+
+    console.log('invoice.payment_succeeded')
+
+    await db.file.updateMany({
+      where: {
+        userId: session.metadata.userId,
+      },
+      data: {
+        uploadStatus: 'SUCCESS'
+      },
+
     })
   }
 

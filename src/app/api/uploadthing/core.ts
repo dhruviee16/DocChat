@@ -94,8 +94,6 @@ const onUploadComplete = async ({
       openAIApiKey: process.env.OPENAI_API_KEY,
     });
 
-    console.log("pageLevelDocs", pageLevelDocs);
-
     await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
       pineconeIndex,
       namespace: createdFile.id,
